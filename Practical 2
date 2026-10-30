@@ -1,0 +1,74 @@
+from collections import deque
+
+# Create graph
+graph = {
+    "Central": ["North", "West"],
+    "North": ["Central", "NorthEast", "East"],
+    "West": ["Central", "SouthWest"],
+    "NorthEast": ["North"],
+    "East": ["North", "SouthEast"],
+    "SouthWest": ["West"],
+    "SouthEast": ["East"]
+}
+
+# Display graph
+for node, neighbors in graph.items():
+    print(node, "->", neighbors)
+
+# BFS
+def bfs(graph, start):
+    visited = {start}
+    queue = deque([start])
+    order = []
+
+    while queue:
+        node = queue.popleft()
+        order.append(node)
+
+        for n in graph[node]:
+            if n not in visited:
+                visited.add(n)
+                queue.append(n)
+
+    return order
+
+# DFS
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+
+    visited.add(start)
+    order.append(start)
+
+    for n in graph[start]:
+        if n not in visited:
+            dfs(graph, n, visited)
+
+    return order
+
+# BFS path
+def bfs_path(graph, start, goal):
+    queue = deque([[start]])
+    visited = {start}
+
+    while queue:
+        path = queue.popleft()
+        node = path[-1]
+
+        if node == goal:
+            return path
+
+        for n in graph[node]:
+            if n not in visited:
+                visited.add(n)
+                queue.append(path + [n])
+
+    return None
+
+print("BFS traversal order:", bfs(graph, "Central"))
+
+order = []
+print("DFS traversal order:", dfs(graph, "Central"))
+
+path = bfs_path(graph, "Central", "SouthEast")
+print("Path:", " -> ".join(path))
