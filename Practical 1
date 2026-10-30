@@ -1,0 +1,79 @@
+import sys
+import platform
+import numpy as np
+import pandas as pd
+import sklearn
+import matplotlib.pyplot as plt
+
+# Python information
+print("Python Version:", platform.python_version())
+print("Compiler:", platform.python_compiler())
+print("Execution Path:", sys.executable)
+
+# Library versions
+print("NumPy Version:", np.__version__)
+print("Pandas Version:", pd.__version__)
+print("Scikit-learn Version:", sklearn.__version__)
+print("All AI libraries imported successfully!")
+
+# List
+products = ["Laptop", "Mouse", "Keyboard", "Monitor"]
+products.append("Webcam")
+products.remove("Mouse")
+print("Products:", products)
+
+# Dictionary
+prices = {"Laptop": 55000, "Keyboard": 1200, "Monitor": 9500}
+prices["Webcam"] = 2200
+print("Laptop price:", prices["Laptop"])
+print("All prices:", prices)
+
+# Set
+categories_mon = {"Electronics", "Accessories", "Electronics"}
+categories_tue = {"Accessories", "Furniture"}
+print("Union:", categories_mon | categories_tue)
+print("Intersection:", categories_mon & categories_tue)
+
+# NumPy array
+sales_units = np.array([12, 18, 9, 25, 30, 22, 15])
+print("Array:", sales_units)
+print("Shape:", sales_units.shape)
+print("Total units:", sales_units.sum())
+print("Average:", sales_units.mean())
+print("Maximum:", sales_units.max())
+
+projected = sales_units * 1.10
+print("Projected next week:", projected)
+
+# 2D array
+matrix = np.array([
+    [12, 18, 9, 25, 30, 22, 15],
+    [8, 14, 11, 19, 21, 17, 13]
+])
+print("2D shape:", matrix.shape)
+print("Row sums:", matrix.sum(axis=1))
+
+# Pandas Series
+prices = pd.Series(
+    [55000, 600, 1200, 9500],
+    index=["Laptop", "Mouse", "Keyboard", "Monitor"]
+)
+print("Series:\n", prices)
+
+# DataFrame
+data = {
+    "Product": ["Laptop", "Mouse", "Keyboard", "Monitor"],
+    "Category": ["Electronics", "Accessories", "Accessories", "Electronics"],
+    "UnitsSold": [12, 45, 30, 18],
+    "UnitPrice": [55000, 600, 1200, 9500]
+}
+
+df = pd.DataFrame(data)
+print("DataFrame:\n", df)
+
+# Revenue calculation
+df["Revenue"] = df["UnitsSold"] * df["UnitPrice"]
+print("With Revenue:\n", df)
+
+print("Grouped by Category:\n",
+      df.groupby("Category")["Revenue"].sum())
